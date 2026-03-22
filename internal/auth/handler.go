@@ -6,18 +6,18 @@ import (
 	"example.com/ecommerce/pkg/handler"
 )
 
-type AuthService interface {
+type authService interface {
 	Register(req RegisterRequest) (*AuthResponse, error)
 	Login(req LoginRequest) (*AuthResponse, error)
 }
 
 type Handler struct {
-	handler.Base[AuthService]
+	handler.Base[authService]
 }
 
-func NewHandler(service AuthService) *Handler {
+func NewHandler(service authService) *Handler {
 	return &Handler{
-		Base: handler.Base[AuthService]{Service: service},
+		Base: handler.Base[authService]{Service: service},
 	}
 }
 
