@@ -39,11 +39,15 @@ func ParseToken(tokenString string) (*Claims, error) {
 		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("unexpected signing method")
 		}
-		return secret, nil
+		return []byte(secret), nil
 	})
-
 	if err != nil {
 		return nil, errors.New("invalid or expired token")
+	}
+
+	// token can be non-nil but invalid — check both
+	if token == nil || !token.Valid {
+		return nil, errors.New("invalid token")
 	}
 
 	claims, ok := token.Claims.(*Claims)

@@ -18,9 +18,7 @@ func main() {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
-	r.Route("/api/v1", func(r chi.Router) {
-		userapi.RegisterRoutes(r, handler)
-	})
+	userapi.RegisterRoutes(r, handler)
 
 	fmt.Println("User service running on :8082")
 	http.ListenAndServe(":8082", r)

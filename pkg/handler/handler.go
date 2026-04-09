@@ -47,3 +47,11 @@ func (b *Base[T]) Conflict(w http.ResponseWriter, msg string) {
 func (b *Base[T]) InternalError(w http.ResponseWriter, msg string) {
 	response.Err(w, http.StatusInternalServerError, msg)
 }
+
+func (b *Base[T]) BadGateway(w http.ResponseWriter, msg string) {
+	response.Err(w, http.StatusBadGateway, msg)
+}
+
+func (b *Base[T]) ServiceUnavailable(w http.ResponseWriter, msg string) {
+	response.Err(w, http.StatusServiceUnavailable, msg)
+}
